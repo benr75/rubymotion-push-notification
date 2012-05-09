@@ -1,0 +1,18 @@
+$:.unshift("/Library/RubyMotion/lib")
+require 'motion/project'
+
+Motion::Project::App.setup do |app|
+  # Use `rake config' to see complete project settings.
+  app.name = 'PushTest'
+  app.identifier = 'YOUR_APP_ID'
+  app.codesign_certificate = "YOUR_CODE_SIGNING_CERT"
+  app.provisioning_profile = "YOUT_PATH_TO_PROVISIONING_FILE"
+  app.seed_id = "YOUR_APP_SEED"
+  app.entitlements['application-identifier'] = app.seed_id + '.' + app.identifier
+  app.entitlements['keychain-access-groups'] = [
+    app.seed_id + '.' + app.identifier
+  ]
+  app.entitlements['aps-environment'] = 'development'
+  app.entitlements['get-task-allow'] = true
+
+end
